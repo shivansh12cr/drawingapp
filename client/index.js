@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const socket = io("http://localhost:5500");
+const socket = io("https://drawingapp-e3p5.onrender.com");
 
 
 
