@@ -28,6 +28,12 @@ let finaly = null;
 const width1 = document.getElementById("lineWidth");
 let lineWidth = parseInt(width1.value);
 
+width1.addEventListener("input",()=>{
+  lineWidth = parseInt(width1.value);
+  socket.emit("draw", {lineWidth});
+  ctx.lineWidth = lineWidth;
+})
+
 
 document.getElementById("undoBtn").addEventListener("click", undo);
 document.getElementById("redoBtn").addEventListener("click", redo);
@@ -59,11 +65,7 @@ function redo(emit = true) {
 
 
 
-width1.addEventListener("input",()=>{
-  lineWidth = parseInt(width1.value);
-  socket.emit("draw", {lineWidth});
-  ctx.lineWidth = lineWidth;
-})
+
 
 tools.forEach(tool => {
   tool.addEventListener('change', () => {
@@ -205,7 +207,7 @@ socket.on("draw", (data) => {
   const {lineWidth} = data;
   const{start} = data;
   
-  
+  const prev = ctx.lineWidth;
   ctx.lineWidth = lineWidth;
   if (tool === "circle") {
     const { startX, startY, x, y } = data;
@@ -248,8 +250,8 @@ socket.on("draw", (data) => {
   if(okk){
     saveState();
   }
+  ctx.lineWidth = prev;
 
-  
   
 });
 
