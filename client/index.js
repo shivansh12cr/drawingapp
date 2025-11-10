@@ -167,7 +167,7 @@ canvas.addEventListener('mousemove', (e) => {
   ctx.lineTo(x, y);
   ctx.stroke();
 
-  socket.emit("draw", { tool: "brush", startX, startY, x, y, drawing });
+  socket.emit("draw", { tool: "brush", startX, startY, x, y, drawing,lineWidth });
 
   startX = x;
   startY= y; 
@@ -190,7 +190,7 @@ canvas.addEventListener('mousemove', (e) => {
     ctx.clearRect(x - size / 2, y - size / 2, 2*size,2* size);
     ctx.fillRect(x - size / 2, y - size / 2, 2*size, 2*size);
 
-    socket.emit("draw", { tool: "eraser", x, y, size ,drawing});
+    socket.emit("draw", { tool: "eraser", x, y, size ,drawing,lineWidth});
 });
 
 canvas.addEventListener('mousedown', (e) => {
@@ -282,5 +282,5 @@ canvas.addEventListener('mouseup', () => {
   if(startX===finalx&&startY===finaly){
     return;
   }
-  socket.emit("draw", { tool: currentTool, startX, startY,x: finalx, y: finaly, start});
+  socket.emit("draw", { tool: currentTool, startX, startY,x: finalx, y: finaly, start,lineWidth});
 });
