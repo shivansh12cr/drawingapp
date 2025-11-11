@@ -27,7 +27,7 @@ let finalx = null;
 let finaly = null;
 const width1 = document.getElementById("lineWidth");
 let lineWidth = parseInt(width1.value);
-
+ctx.lineWidth = lineWidth;
 width1.addEventListener("input",()=>{
   lineWidth = parseInt(width1.value);
   socket.emit("draw", {lineWidth});
